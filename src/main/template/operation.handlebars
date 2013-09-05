@@ -9,20 +9,27 @@
           <span class='path'>
           <a href='#!/{{resourceName}}/{{nickname}}_{{method}}_{{number}}' class="toggleOperation">{{path}}</a>
           </span>
-        </h3>
-        <ul class='options'>
-          <li>
+          <span class='xx'>
           <a href='#!/{{resourceName}}/{{nickname}}_{{method}}_{{number}}' class="toggleOperation">{{{summary}}}</a>
-          </li>
+          </span>
+        </h3>
+        {{#if reviser}}
+        <ul class='options'>
+          <li>{{reviser}} 更新于：{{updateTime}}</li>
         </ul>
+        {{/if}}
       </div>
       <div class='content' id='{{resourceName}}_{{nickname}}_{{method}}_{{number}}_content' style='display:none'>
         {{#if notes}}
-        <h4>Implementation Notes</h4>
-        <p>{{{notes}}}</p>
+        <h4>API说明:</h4>
+        <p style="margin-top:10px;padding:15px;background:#fff;">{{{notes}}}</p>
+        {{/if}}
+        {{#if revisionDesc}}
+        <h4>修订说明:</h4>
+        <p style="margin-top:10px;padding:15px;background:#fff;">{{{revisionDesc}}}</p>
         {{/if}}
         {{#if type}}
-          <h4>Response Class</h4>
+          <h4>返回对象</h4>
           <p><span class="model-signature" /></p>
           <br/>
           <div class="response-content-type" />
@@ -30,15 +37,15 @@
         <form accept-charset='UTF-8' class='sandbox'>
           <div style='margin:0;padding:0;display:inline'></div>
           {{#if parameters}}
-          <h4>Parameters</h4>
+          <h4>请求参数</h4>
           <table class='fullwidth'>
           <thead>
             <tr>
-            <th style="width: 100px; max-width: 100px">Parameter</th>
-            <th style="width: 310px; max-width: 310px">Value</th>
-            <th style="width: 200px; max-width: 200px">Description</th>
-            <th style="width: 100px; max-width: 100px">Parameter Type</th>
-            <th style="width: 220px; max-width: 230px">Data Type</th>
+            <th style="width: 100px; max-width: 100px">参数</th>
+            <th style="width: 310px; max-width: 310px">值</th>
+            <th style="width: 200px; max-width: 200px">说明信息</th>
+            <th style="width: 100px; max-width: 100px">参数类型</th>
+            <th style="width: 220px; max-width: 230px">数据类型</th>
             </tr>
           </thead>
           <tbody class="operation-params">
@@ -48,12 +55,12 @@
           {{/if}}
           {{#if responseMessages}}
           <div style='margin:0;padding:0;display:inline'></div>
-          <h4>Error Status Codes</h4>
+          <h4>状态码</h4>
           <table class='fullwidth'>
             <thead>
             <tr>
-              <th>HTTP Status Code</th>
-              <th>Reason</th>
+              <th>状态码</th>
+              <th>原因</th>
             </tr>
             </thead>
             <tbody class="operation-status">
@@ -64,20 +71,20 @@
           {{#if isReadOnly}}
           {{else}}
           <div class='sandbox_header'>
-            <input class='submit' name='commit' type='button' value='Try it out!' />
-            <a href='#' class='response_hider' style='display:none'>Hide Response</a>
+            <input class='submit' name='commit' type='button' value='测试' />
+            <a href='#' class='response_hider' style='display:none'>收起结果</a>
             <img alt='Throbber' class='response_throbber' src='images/throbber.gif' style='display:none' />
           </div>
           {{/if}}
         </form>
         <div class='response' style='display:none'>
-          <h4>Request URL</h4>
+          <h4>请求 URL</h4>
           <div class='block request_url'></div>
-          <h4>Response Body</h4>
+          <h4>返回结果</h4>
           <div class='block response_body'></div>
-          <h4>Response Code</h4>
+          <h4>状态码</h4>
           <div class='block response_code'></div>
-          <h4>Response Headers</h4>
+          <h4>头信息</h4>
           <div class='block response_headers'></div>
         </div>
       </div>

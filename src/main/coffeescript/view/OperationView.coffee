@@ -35,7 +35,7 @@ class OperationView extends Backbone.View
       type = param.type || param.dataType
       if type.toLowerCase() == 'file'
         if !contentTypeModel.consumes
-          console.log "set content type "
+          # console.log "set content type "
           contentTypeModel.consumes = 'multipart/form-data'
 
     responseContentTypeView = new ResponseContentTypeView({model: contentTypeModel})
@@ -52,6 +52,7 @@ class OperationView extends Backbone.View
   addParameter: (param, consumes) ->
     # Render a parameter
     param.consumes = consumes
+
     paramView = new ParameterView({model: param, tagName: 'tr', readOnly: @model.isReadOnly})
     $('.operation-params', $(@el)).append paramView.render().el
 

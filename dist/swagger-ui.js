@@ -257,7 +257,7 @@ function program2(depth0,data) {
   var buffer = "", stack1;
   buffer += "<div class=\"info_tos\"><a href=\""
     + escapeExpression(((stack1 = ((stack1 = depth0.info),stack1 == null || stack1 === false ? stack1 : stack1.termsOfServiceUrl)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\">Terms of service</a></div>";
+    + "\">使用条款</a></div>";
   return buffer;
   }
 
@@ -266,7 +266,7 @@ function program4(depth0,data) {
   var buffer = "", stack1;
   buffer += "<div class='info_contact'><a href=\"mailto:"
     + escapeExpression(((stack1 = ((stack1 = depth0.info),stack1 == null || stack1 === false ? stack1 : stack1.contact)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\">Contact the developer</a></div>";
+    + "\">联系我们</a></div>";
   return buffer;
   }
 
@@ -317,7 +317,22 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n        <h4>Implementation Notes</h4>\n        <p>";
+  buffer += "\n        <ul class='options'>\n          <li>";
+  if (stack1 = helpers.reviser) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.reviser; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + " 更新于：";
+  if (stack1 = helpers.updateTime) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.updateTime; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</li>\n        </ul>\n        ";
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n        <h4>API说明:</h4>\n        <p style=\"margin-top:10px;padding:15px;background:#fff;\">";
   if (stack1 = helpers.notes) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.notes; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   if(stack1 || stack1 === 0) { buffer += stack1; }
@@ -325,34 +340,45 @@ function program1(depth0,data) {
   return buffer;
   }
 
-function program3(depth0,data) {
-  
-  
-  return "\n          <h4>Response Class</h4>\n          <p><span class=\"model-signature\" /></p>\n          <br/>\n          <div class=\"response-content-type\" />\n        ";
-  }
-
 function program5(depth0,data) {
   
-  
-  return "\n          <h4>Parameters</h4>\n          <table class='fullwidth'>\n          <thead>\n            <tr>\n            <th style=\"width: 100px; max-width: 100px\">Parameter</th>\n            <th style=\"width: 310px; max-width: 310px\">Value</th>\n            <th style=\"width: 200px; max-width: 200px\">Description</th>\n            <th style=\"width: 100px; max-width: 100px\">Parameter Type</th>\n            <th style=\"width: 220px; max-width: 230px\">Data Type</th>\n            </tr>\n          </thead>\n          <tbody class=\"operation-params\">\n\n          </tbody>\n          </table>\n          ";
+  var buffer = "", stack1;
+  buffer += "\n        <h4>修订说明:</h4>\n        <p style=\"margin-top:10px;padding:15px;background:#fff;\">";
+  if (stack1 = helpers.revisionDesc) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.revisionDesc; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "</p>\n        ";
+  return buffer;
   }
 
 function program7(depth0,data) {
   
   
-  return "\n          <div style='margin:0;padding:0;display:inline'></div>\n          <h4>Error Status Codes</h4>\n          <table class='fullwidth'>\n            <thead>\n            <tr>\n              <th>HTTP Status Code</th>\n              <th>Reason</th>\n            </tr>\n            </thead>\n            <tbody class=\"operation-status\">\n            \n            </tbody>\n          </table>\n          ";
+  return "\n          <h4>返回对象</h4>\n          <p><span class=\"model-signature\" /></p>\n          <br/>\n          <div class=\"response-content-type\" />\n        ";
   }
 
 function program9(depth0,data) {
   
   
-  return "\n          ";
+  return "\n          <h4>请求参数</h4>\n          <table class='fullwidth'>\n          <thead>\n            <tr>\n            <th style=\"width: 100px; max-width: 100px\">参数</th>\n            <th style=\"width: 310px; max-width: 310px\">值</th>\n            <th style=\"width: 200px; max-width: 200px\">说明信息</th>\n            <th style=\"width: 100px; max-width: 100px\">参数类型</th>\n            <th style=\"width: 220px; max-width: 230px\">数据类型</th>\n            </tr>\n          </thead>\n          <tbody class=\"operation-params\">\n\n          </tbody>\n          </table>\n          ";
   }
 
 function program11(depth0,data) {
   
   
-  return "\n          <div class='sandbox_header'>\n            <input class='submit' name='commit' type='button' value='Try it out!' />\n            <a href='#' class='response_hider' style='display:none'>Hide Response</a>\n            <img alt='Throbber' class='response_throbber' src='images/throbber.gif' style='display:none' />\n          </div>\n          ";
+  return "\n          <div style='margin:0;padding:0;display:inline'></div>\n          <h4>状态码</h4>\n          <table class='fullwidth'>\n            <thead>\n            <tr>\n              <th>状态码</th>\n              <th>原因</th>\n            </tr>\n            </thead>\n            <tbody class=\"operation-status\">\n            \n            </tbody>\n          </table>\n          ";
+  }
+
+function program13(depth0,data) {
+  
+  
+  return "\n          ";
+  }
+
+function program15(depth0,data) {
+  
+  
+  return "\n          <div class='sandbox_header'>\n            <input class='submit' name='commit' type='button' value='测试' />\n            <a href='#' class='response_hider' style='display:none'>收起结果</a>\n            <img alt='Throbber' class='response_throbber' src='images/throbber.gif' style='display:none' />\n          </div>\n          ";
   }
 
   buffer += "\n  <ul class='operations' >\n    <li class='";
@@ -415,7 +441,7 @@ function program11(depth0,data) {
   if (stack1 = helpers.path) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.path; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</a>\n          </span>\n        </h3>\n        <ul class='options'>\n          <li>\n          <a href='#!/";
+    + "</a>\n          </span>\n          <span class='xx'>\n          <a href='#!/";
   if (stack1 = helpers.resourceName) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.resourceName; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -435,7 +461,10 @@ function program11(depth0,data) {
   if (stack1 = helpers.summary) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.summary; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</a>\n          </li>\n        </ul>\n      </div>\n      <div class='content' id='";
+  buffer += "</a>\n          </span>\n        </h3>\n        ";
+  stack1 = helpers['if'].call(depth0, depth0.revisionDesc, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n      </div>\n      <div class='content' id='";
   if (stack1 = helpers.resourceName) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.resourceName; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -452,21 +481,24 @@ function program11(depth0,data) {
   else { stack1 = depth0.number; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
     + "_content' style='display:none'>\n        ";
-  stack1 = helpers['if'].call(depth0, depth0.notes, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.notes, {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n        ";
-  stack1 = helpers['if'].call(depth0, depth0.type, {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.revisionDesc, {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n        ";
+  stack1 = helpers['if'].call(depth0, depth0.type, {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n        <form accept-charset='UTF-8' class='sandbox'>\n          <div style='margin:0;padding:0;display:inline'></div>\n          ";
-  stack1 = helpers['if'].call(depth0, depth0.parameters, {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.parameters, {hash:{},inverse:self.noop,fn:self.program(9, program9, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n          ";
-  stack1 = helpers['if'].call(depth0, depth0.responseMessages, {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.responseMessages, {hash:{},inverse:self.noop,fn:self.program(11, program11, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n          ";
-  stack1 = helpers['if'].call(depth0, depth0.isReadOnly, {hash:{},inverse:self.program(11, program11, data),fn:self.program(9, program9, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.isReadOnly, {hash:{},inverse:self.program(15, program15, data),fn:self.program(13, program13, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        </form>\n        <div class='response' style='display:none'>\n          <h4>Request URL</h4>\n          <div class='block request_url'></div>\n          <h4>Response Body</h4>\n          <div class='block response_body'></div>\n          <h4>Response Code</h4>\n          <div class='block response_code'></div>\n          <h4>Response Headers</h4>\n          <div class='block response_headers'></div>\n        </div>\n      </div>\n    </li>\n  </ul>\n";
+  buffer += "\n        </form>\n        <div class='response' style='display:none'>\n          <h4>请求 URL</h4>\n          <div class='block request_url'></div>\n          <h4>返回结果</h4>\n          <div class='block response_body'></div>\n          <h4>状态码</h4>\n          <div class='block response_code'></div>\n          <h4>头信息</h4>\n          <div class='block response_headers'></div>\n        </div>\n      </div>\n    </li>\n  </ul>\n";
   return buffer;
   });
 })();
@@ -481,28 +513,40 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n		";
-  stack1 = helpers['if'].call(depth0, depth0.isFile, {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n	";
-  return buffer;
-  }
-function program2(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += "\n			<input type=\"file\" name='";
+  buffer += "\n<td colspan=\"4\">\n<textarea class='body-textarea' name='";
   if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "'/>\n			<div class=\"parameter-content-type\" />\n		";
+    + "' style='margin: 0px; width: 710px; height: 350px;'></textarea>\n</td>\n<td>\n	<span class=\"model-signature\"></span>\n</td>\n";
   return buffer;
   }
 
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n	<td class='code'>";
+  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n	<td>\n\n		";
+  stack1 = helpers['if'].call(depth0, depth0.isBody, {hash:{},inverse:self.program(12, program12, data),fn:self.program(4, program4, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n\n	</td>\n	<td>";
+  if (stack1 = helpers.description) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.description; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "</td>\n	<td>";
+  if (stack1 = helpers.paramType) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.paramType; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "</td>\n	<td>\n		<span class=\"model-signature\"></span>\n	</td>\n";
+  return buffer;
+  }
 function program4(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n			";
-  stack1 = helpers['if'].call(depth0, depth0.defaultValue, {hash:{},inverse:self.program(7, program7, data),fn:self.program(5, program5, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.isFile, {hash:{},inverse:self.program(7, program7, data),fn:self.program(5, program5, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n		";
   return buffer;
@@ -510,7 +554,27 @@ function program4(depth0,data) {
 function program5(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n				<textarea class='body-textarea' name='";
+  buffer += "\n				<input type=\"file\" name='";
+  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "'/>\n				<div class=\"parameter-content-type\" />\n			";
+  return buffer;
+  }
+
+function program7(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n				";
+  stack1 = helpers['if'].call(depth0, depth0.defaultValue, {hash:{},inverse:self.program(10, program10, data),fn:self.program(8, program8, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n			";
+  return buffer;
+  }
+function program8(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n					<textarea class='body-textarea' name='";
   if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -518,34 +582,34 @@ function program5(depth0,data) {
   if (stack1 = helpers.defaultValue) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.defaultValue; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "</textarea>\n			";
+    + "</textarea>\n				";
   return buffer;
   }
 
-function program7(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += "\n				<textarea class='body-textarea' name='";
-  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "'></textarea>\n				<br />\n				<div class=\"parameter-content-type\" />\n			";
-  return buffer;
-  }
-
-function program9(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += "\n		";
-  stack1 = helpers['if'].call(depth0, depth0.defaultValue, {hash:{},inverse:self.program(12, program12, data),fn:self.program(10, program10, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n	";
-  return buffer;
-  }
 function program10(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n			<input class='parameter' minlength='0' name='";
+  buffer += "\n					<textarea class='body-textarea' name='";
+  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "'></textarea>\n					<br />\n					<div class=\"parameter-content-type\" />\n				";
+  return buffer;
+  }
+
+function program12(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n			";
+  stack1 = helpers['if'].call(depth0, depth0.defaultValue, {hash:{},inverse:self.program(15, program15, data),fn:self.program(13, program13, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n		";
+  return buffer;
+  }
+function program13(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n				<input class='parameter' minlength='0' name='";
   if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -553,37 +617,24 @@ function program10(depth0,data) {
   if (stack1 = helpers.defaultValue) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.defaultValue; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "'/>\n		";
+    + "'/>\n			";
   return buffer;
   }
 
-function program12(depth0,data) {
+function program15(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n			<input class='parameter' minlength='0' name='";
+  buffer += "\n				<input class='parameter' minlength='0' name='";
   if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "' placeholder='' type='text' value=''/>\n		";
+    + "' placeholder='' type='text' value=''/>\n			";
   return buffer;
   }
 
-  buffer += "<td class='code'>";
-  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "</td>\n<td>\n\n	";
-  stack1 = helpers['if'].call(depth0, depth0.isBody, {hash:{},inverse:self.program(9, program9, data),fn:self.program(1, program1, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.isJsonBody, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n\n</td>\n<td>";
-  if (stack1 = helpers.description) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.description; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</td>\n<td>";
-  if (stack1 = helpers.paramType) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.paramType; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</td>\n<td>\n	<span class=\"model-signature\"></span>\n</td>\n";
+  buffer += "\n";
   return buffer;
   });
 })();
@@ -834,13 +885,45 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
+  buffer += "\n<td colspan=\"4\">\n<textarea class='body-textarea' name='";
+  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "' style='margin: 0px; width: 710px; height: 350px;'></textarea>\n</td>\n<td>\n	<span class=\"model-signature\"></span>\n</td>\n";
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n<td class='code required'>";
+  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n<td>\n	";
+  stack1 = helpers['if'].call(depth0, depth0.isBody, {hash:{},inverse:self.program(12, program12, data),fn:self.program(4, program4, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n</td>\n<td>\n	<strong>";
+  if (stack1 = helpers.description) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.description; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "</strong>\n</td>\n<td>";
+  if (stack1 = helpers.paramType) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.paramType; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "</td>\n<td><span class=\"model-signature\"></span></td>\n";
+  return buffer;
+  }
+function program4(depth0,data) {
+  
+  var buffer = "", stack1;
   buffer += "\n		";
-  stack1 = helpers['if'].call(depth0, depth0.isFile, {hash:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.isFile, {hash:{},inverse:self.program(7, program7, data),fn:self.program(5, program5, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n	";
   return buffer;
   }
-function program2(depth0,data) {
+function program5(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n			<input type=\"file\" name='";
@@ -851,16 +934,16 @@ function program2(depth0,data) {
   return buffer;
   }
 
-function program4(depth0,data) {
+function program7(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n			";
-  stack1 = helpers['if'].call(depth0, depth0.defaultValue, {hash:{},inverse:self.program(7, program7, data),fn:self.program(5, program5, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.defaultValue, {hash:{},inverse:self.program(10, program10, data),fn:self.program(8, program8, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n		";
   return buffer;
   }
-function program5(depth0,data) {
+function program8(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n				<textarea class='body-textarea' placeholder='(required)' name='";
@@ -875,7 +958,7 @@ function program5(depth0,data) {
   return buffer;
   }
 
-function program7(depth0,data) {
+function program10(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n				<textarea class='body-textarea' placeholder='(required)' name='";
@@ -886,16 +969,16 @@ function program7(depth0,data) {
   return buffer;
   }
 
-function program9(depth0,data) {
+function program12(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n		";
-  stack1 = helpers['if'].call(depth0, depth0.isFile, {hash:{},inverse:self.program(12, program12, data),fn:self.program(10, program10, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.isFile, {hash:{},inverse:self.program(15, program15, data),fn:self.program(13, program13, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n	";
   return buffer;
   }
-function program10(depth0,data) {
+function program13(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n			<input class='parameter' class='required' type='file' name='";
@@ -906,16 +989,16 @@ function program10(depth0,data) {
   return buffer;
   }
 
-function program12(depth0,data) {
+function program15(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n			";
-  stack1 = helpers['if'].call(depth0, depth0.defaultValue, {hash:{},inverse:self.program(15, program15, data),fn:self.program(13, program13, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.defaultValue, {hash:{},inverse:self.program(18, program18, data),fn:self.program(16, program16, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n		";
   return buffer;
   }
-function program13(depth0,data) {
+function program16(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n				<input class='parameter required' minlength='1' name='";
@@ -930,7 +1013,7 @@ function program13(depth0,data) {
   return buffer;
   }
 
-function program15(depth0,data) {
+function program18(depth0,data) {
   
   var buffer = "", stack1;
   buffer += "\n				<input class='parameter required' minlength='1' name='";
@@ -941,22 +1024,9 @@ function program15(depth0,data) {
   return buffer;
   }
 
-  buffer += "<td class='code required'>";
-  if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "</td>\n<td>\n	";
-  stack1 = helpers['if'].call(depth0, depth0.isBody, {hash:{},inverse:self.program(9, program9, data),fn:self.program(1, program1, data),data:data});
+  stack1 = helpers['if'].call(depth0, depth0.isJsonBody, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n</td>\n<td>\n	<strong>";
-  if (stack1 = helpers.description) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.description; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</strong>\n</td>\n<td>";
-  if (stack1 = helpers.paramType) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.paramType; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</td>\n<td><span class=\"model-signature\"></span></td>\n";
+  buffer += "\n";
   return buffer;
   });
 })();
@@ -1036,15 +1106,15 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "');\">Show/Hide</a>\n    </li>\n    <li>\n      <a href='#' onclick=\"Docs.collapseOperationsForResource('";
+    + "');\">展开/收起</a>\n    </li>\n    <li>\n      <a href='#' onclick=\"Docs.collapseOperationsForResource('";
   if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "'); return false;\">\n        List Operations\n      </a>\n    </li>\n    <li>\n      <a href='#' onclick=\"Docs.expandOperationsForResource('";
+    + "'); return false;\">\n		查看列表\n      </a>\n    </li>\n    <li>\n      <a href='#' onclick=\"Docs.expandOperationsForResource('";
   if (stack1 = helpers.name) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.name; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "'); return false;\">\n        Expand Operations\n      </a>\n    </li>\n    <li>\n      <a href='";
+    + "'); return false;\">\n        展开所有\n      </a>\n    </li>\n    <li>\n      <a href='";
   if (stack1 = helpers.url) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.url; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -1108,7 +1178,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<div>\n<ul class=\"signature-nav\">\n    <li><a class=\"description-link\" href=\"#\">Model</a></li>\n    <li><a class=\"snippet-link\" href=\"#\">Model Schema</a></li>\n</ul>\n<div>\n\n<div class=\"signature-container\">\n    <div class=\"description\">\n        ";
+  buffer += "<div>\n<ul class=\"signature-nav\">\n    <li><a class=\"description-link\" href=\"#\">对象</a></li>\n    <li><a class=\"snippet-link\" href=\"#\">对象Raw</a></li>\n</ul>\n<div>\n\n<div class=\"signature-container\">\n    <div class=\"description\">\n        ";
   if (stack1 = helpers.signature) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.signature; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   if(stack1 || stack1 === 0) { buffer += stack1; }
@@ -1144,7 +1214,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
 
 
-// Generated by CoffeeScript 1.4.0
+// Generated by CoffeeScript 1.5.0
 (function() {
   var ContentTypeView, HeaderView, MainView, OperationView, ParameterContentTypeView, ParameterView, ResourceView, ResponseContentTypeView, SignatureView, StatusCodeView, SwaggerUi,
     __hasProp = {}.hasOwnProperty,
@@ -1155,7 +1225,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     __extends(SwaggerUi, _super);
 
     function SwaggerUi() {
-      return SwaggerUi.__super__.constructor.apply(this, arguments);
+      SwaggerUi.__super__.constructor.apply(this, arguments);
     }
 
     SwaggerUi.prototype.dom_id = "swagger_ui";
@@ -1177,7 +1247,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
         this.dom_id = options.dom_id;
         delete options.dom_id;
       }
-      if (!($('#' + this.dom_id) != null)) {
+      if ($('#' + this.dom_id) == null) {
         $('body').append('<div id="' + this.dom_id + '"></div>');
       }
       this.options = options;
@@ -1244,7 +1314,6 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
     SwaggerUi.prototype.buildUrl = function(base, url) {
       var parts;
-      console.log("base is " + base);
       parts = base.split("/");
       base = parts[0] + "//" + parts[2];
       if (url.indexOf("/") === 0) {
@@ -1288,7 +1357,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     __extends(HeaderView, _super);
 
     function HeaderView() {
-      return HeaderView.__super__.constructor.apply(this, arguments);
+      HeaderView.__super__.constructor.apply(this, arguments);
     }
 
     HeaderView.prototype.events = {
@@ -1350,7 +1419,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     __extends(MainView, _super);
 
     function MainView() {
-      return MainView.__super__.constructor.apply(this, arguments);
+      MainView.__super__.constructor.apply(this, arguments);
     }
 
     MainView.prototype.initialize = function() {};
@@ -1390,7 +1459,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     __extends(ResourceView, _super);
 
     function ResourceView() {
-      return ResourceView.__super__.constructor.apply(this, arguments);
+      ResourceView.__super__.constructor.apply(this, arguments);
     }
 
     ResourceView.prototype.initialize = function() {};
@@ -1428,7 +1497,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     __extends(OperationView, _super);
 
     function OperationView() {
-      return OperationView.__super__.constructor.apply(this, arguments);
+      OperationView.__super__.constructor.apply(this, arguments);
     }
 
     OperationView.prototype.events = {
@@ -1472,7 +1541,6 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
         type = param.type || param.dataType;
         if (type.toLowerCase() === 'file') {
           if (!contentTypeModel.consumes) {
-            console.log("set content type ");
             contentTypeModel.consumes = 'multipart/form-data';
           }
         }
@@ -1717,7 +1785,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     __extends(StatusCodeView, _super);
 
     function StatusCodeView() {
-      return StatusCodeView.__super__.constructor.apply(this, arguments);
+      StatusCodeView.__super__.constructor.apply(this, arguments);
     }
 
     StatusCodeView.prototype.initialize = function() {};
@@ -1742,7 +1810,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     __extends(ParameterView, _super);
 
     function ParameterView() {
-      return ParameterView.__super__.constructor.apply(this, arguments);
+      ParameterView.__super__.constructor.apply(this, arguments);
     }
 
     ParameterView.prototype.initialize = function() {};
@@ -1755,6 +1823,9 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
       }
       if (type.toLowerCase() === 'file') {
         this.model.isFile = true;
+      }
+      if (this.model.paramType.toLowerCase() === 'jsonbody') {
+        this.model.isJsonBody = true;
       }
       template = this.template();
       $(this.el).html(template(this.model));
@@ -1823,7 +1894,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     __extends(SignatureView, _super);
 
     function SignatureView() {
-      return SignatureView.__super__.constructor.apply(this, arguments);
+      SignatureView.__super__.constructor.apply(this, arguments);
     }
 
     SignatureView.prototype.events = {
@@ -1841,7 +1912,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
       this.switchToDescription();
       this.isParam = this.model.isParam;
       if (this.isParam) {
-        $('.notice', $(this.el)).text('Click to set as parameter value');
+        $('.notice', $(this.el)).text('点击对象Raw作为参数');
       }
       return this;
     };
@@ -1892,7 +1963,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     __extends(ContentTypeView, _super);
 
     function ContentTypeView() {
-      return ContentTypeView.__super__.constructor.apply(this, arguments);
+      ContentTypeView.__super__.constructor.apply(this, arguments);
     }
 
     ContentTypeView.prototype.initialize = function() {};
@@ -1901,7 +1972,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
       var template;
       template = this.template();
       $(this.el).html(template(this.model));
-      $('label[for=contentType]', $(this.el)).text('Response Content Type');
+      $('label[for=contentType]', $(this.el)).text('返回内容类型');
       return this;
     };
 
@@ -1918,7 +1989,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     __extends(ResponseContentTypeView, _super);
 
     function ResponseContentTypeView() {
-      return ResponseContentTypeView.__super__.constructor.apply(this, arguments);
+      ResponseContentTypeView.__super__.constructor.apply(this, arguments);
     }
 
     ResponseContentTypeView.prototype.initialize = function() {};
@@ -1927,7 +1998,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
       var template;
       template = this.template();
       $(this.el).html(template(this.model));
-      $('label[for=responseContentType]', $(this.el)).text('Response Content Type');
+      $('label[for=responseContentType]', $(this.el)).text('返回内容类型');
       return this;
     };
 
@@ -1944,7 +2015,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     __extends(ParameterContentTypeView, _super);
 
     function ParameterContentTypeView() {
-      return ParameterContentTypeView.__super__.constructor.apply(this, arguments);
+      ParameterContentTypeView.__super__.constructor.apply(this, arguments);
     }
 
     ParameterContentTypeView.prototype.initialize = function() {};
@@ -1953,7 +2024,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
       var template;
       template = this.template();
       $(this.el).html(template(this.model));
-      $('label[for=parameterContentType]', $(this.el)).text('Parameter content type:');
+      $('label[for=parameterContentType]', $(this.el)).text('参数内容类型:');
       return this;
     };
 

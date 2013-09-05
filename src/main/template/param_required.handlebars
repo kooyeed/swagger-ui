@@ -1,3 +1,11 @@
+{{#if isJsonBody }}
+<td colspan="4">
+<textarea class='body-textarea' name='{{name}}' style='margin: 0px; width: 710px; height: 350px;'></textarea>
+</td>
+<td>
+	<span class="model-signature"></span>
+</td>
+{{else}}
 <td class='code required'>{{name}}</td>
 <td>
 	{{#if isBody}}
@@ -29,3 +37,4 @@
 </td>
 <td>{{{paramType}}}</td>
 <td><span class="model-signature"></span></td>
+{{/if}}
