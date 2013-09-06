@@ -10,11 +10,12 @@
           <a href='#!/{{resourceName}}/{{nickname}}_{{method}}_{{number}}' class="toggleOperation">{{path}}</a>
           </span>
           <span class='xx'>
-          <a href='#!/{{resourceName}}/{{nickname}}_{{method}}_{{number}}' class="toggleOperation">{{{summary}}}</a>
+          <a href='#!/{{resourceName}}/{{nickname}}_{{method}}_{{number}}' class="toggleOperation">{{summary}}</a> 
           </span>
+          <span class="xx" style="color:#ccc;font-size:10px;">{{percent}}</span>
         </h3>
         {{#if reviser}}
-        <ul class='options'>
+        <ul class='options' style="font-size:10px;">
           <li>{{reviser}} 更新于：{{updateTime}}</li>
         </ul>
         {{/if}}

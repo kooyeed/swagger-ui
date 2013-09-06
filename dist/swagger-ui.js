@@ -317,7 +317,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n        <ul class='options'>\n          <li>";
+  buffer += "\n        <ul class='options' style=\"font-size:10px;\">\n          <li>";
   if (stack1 = helpers.reviser) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.reviser; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
@@ -460,8 +460,12 @@ function program15(depth0,data) {
     + "' class=\"toggleOperation\">";
   if (stack1 = helpers.summary) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.summary; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</a>\n          </span>\n        </h3>\n        ";
+  buffer += escapeExpression(stack1)
+    + "</a> \n          </span>\n          <span class=\"xx\" style=\"color:#ccc;font-size:10px;\">";
+  if (stack1 = helpers.percent) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.percent; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</span>\n        </h3>\n        ";
   stack1 = helpers['if'].call(depth0, depth0.reviser, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n      </div>\n      <div class='content' id='";
@@ -1747,7 +1751,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     };
 
     OperationView.prototype.showStatus = function(data) {
-      var code, content, contentType, headers, pre, response_body;
+      var code, content, contentType, headers, pre, response_body, response_headers;
       content = data.content.data;
       headers = data.getHeaders();
       contentType = headers["Content-Type"];
@@ -1771,7 +1775,10 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
       $(".request_url").html("<pre>" + data.request.url + "</pre>");
       $(".response_code", $(this.el)).html("<pre>" + data.status + "</pre>");
       $(".response_body", $(this.el)).html(response_body);
-      $(".response_headers", $(this.el)).html("<pre>" + JSON.stringify(data.getHeaders()) + "</pre>");
+      code = $('<code />').text(JSON.stringify(headers, null, 2));
+      pre = $('<pre class="json" />').append(code);
+      response_headers = pre;
+      $(".response_headers", $(this.el)).html(response_headers);
       $(".response", $(this.el)).slideDown();
       $(".response_hider", $(this.el)).show();
       $(".response_throbber", $(this.el)).hide();
