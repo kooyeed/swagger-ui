@@ -219,6 +219,21 @@ class OperationView extends Backbone.View
     response_headers = pre
     $(".response_headers", $(@el)).html response_headers
 
+    #add async
+    ret = JSON.parse(content)
+    async_wait_info = {
+        "request_id": ret.request_id,
+        "code": "",
+        "message": "",
+        "percent": "0",
+        "data": {}
+    }
+    code = $('<code />').text(JSON.stringify(async_wait_info, null, 2))
+    pre = $('<pre class="json" />').append(code)
+    response_body_async = pre
+    $(".response_body_async", $(@el)).html response_body_async
+    $(".response_body_async", $(@el)).addClass ret.request_id
+
 
     $(".response", $(@el)).slideDown()
     $(".response_hider", $(@el)).show()

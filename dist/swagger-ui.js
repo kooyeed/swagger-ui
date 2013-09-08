@@ -502,7 +502,7 @@ function program15(depth0,data) {
   buffer += "\n          ";
   stack1 = helpers['if'].call(depth0, depth0.isReadOnly, {hash:{},inverse:self.program(15, program15, data),fn:self.program(13, program13, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        </form>\n        <div class='response' style='display:none'>\n          <h4>请求 URL</h4>\n          <div class='block request_url'></div>\n          <h4>返回结果</h4>\n          <div class='block response_body'></div>\n          <h4>状态码</h4>\n          <div class='block response_code'></div>\n          <h4>头信息</h4>\n          <div class='block response_headers'></div>\n        </div>\n      </div>\n    </li>\n  </ul>\n";
+  buffer += "\n        </form>\n        <div class='response' style='display:none'>\n          <h4>请求 URL</h4>\n          <div class='block request_url'></div>\n          <h4>返回结果</h4>\n          <div class='block response_body'></div>\n          <div class='block response_body_async'></div>\n          <h4>状态码</h4>\n          <div class='block response_code'></div>\n          <h4>头信息</h4>\n          <div class='block response_headers'></div>\n        </div>\n      </div>\n    </li>\n  </ul>\n";
   return buffer;
   });
 })();
@@ -1751,7 +1751,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     };
 
     OperationView.prototype.showStatus = function(data) {
-      var code, content, contentType, headers, pre, response_body, response_headers;
+      var async_wait_info, code, content, contentType, headers, pre, response_body, response_body_async, response_headers, ret;
       content = data.content.data;
       headers = data.getHeaders();
       contentType = headers["Content-Type"];
@@ -1779,6 +1779,19 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
       pre = $('<pre class="json" />').append(code);
       response_headers = pre;
       $(".response_headers", $(this.el)).html(response_headers);
+      ret = JSON.parse(content);
+      async_wait_info = {
+        "request_id": ret.request_id,
+        "code": "",
+        "message": "",
+        "percent": "0",
+        "data": {}
+      };
+      code = $('<code />').text(JSON.stringify(async_wait_info, null, 2));
+      pre = $('<pre class="json" />').append(code);
+      response_body_async = pre;
+      $(".response_body_async", $(this.el)).html(response_body_async);
+      $(".response_body_async", $(this.el)).addClass(ret.request_id);
       $(".response", $(this.el)).slideDown();
       $(".response_hider", $(this.el)).show();
       $(".response_throbber", $(this.el)).hide();
