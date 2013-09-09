@@ -1647,6 +1647,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
         opts.responseContentType = $("div select[name=responseContentType]", $(this.el)).val();
         opts.requestContentType = $("div select[name=parameterContentType]", $(this.el)).val();
         $(".response_throbber", $(this.el)).show();
+        console.log("XX:", map, opts, this.showCompleteStatus);
         return this.model["do"](map, opts, this.showCompleteStatus, this.showErrorStatus, this);
       }
     };
@@ -1795,7 +1796,13 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
       $(".response", $(this.el)).slideDown();
       $(".response_hider", $(this.el)).show();
       $(".response_throbber", $(this.el)).hide();
-      return hljs.highlightBlock($('.response_body', $(this.el))[0]);
+      hljs.highlightBlock($('.response_body', $(this.el))[0]);
+      console.log("detect async status.");
+      _cb(function() {
+        return $(".response_body_async", $(this.el)).html("xx" + new Date());
+      });
+      setTimeout(_cb, 2000);
+      return true;
     };
 
     OperationView.prototype.toggleOperationContent = function() {
