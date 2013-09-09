@@ -1647,7 +1647,6 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
         opts.responseContentType = $("div select[name=responseContentType]", $(this.el)).val();
         opts.requestContentType = $("div select[name=parameterContentType]", $(this.el)).val();
         $(".response_throbber", $(this.el)).show();
-        console.log("XX:", map, opts, this.showCompleteStatus);
         return this.model["do"](map, opts, this.showCompleteStatus, this.showErrorStatus, this);
       }
     };
@@ -1752,7 +1751,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     };
 
     OperationView.prototype.showStatus = function(data) {
-      var async_wait_info, code, content, contentType, headers, pre, response_body, response_body_async, response_headers, ret;
+      var async_wait_info, code, content, contentType, detect_status, headers, pre, response_body, response_body_async, response_headers, ret, uri, _this;
       content = data.content.data;
       headers = data.getHeaders();
       contentType = headers["Content-Type"];
@@ -1784,7 +1783,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
       async_wait_info = {
         "request_id": ret.request_id,
         "code": "",
-        "message": "",
+        "message": "正在处理中,请等待...",
         "percent": "0",
         "data": {}
       };
@@ -1793,15 +1792,23 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
       response_body_async = pre;
       $(".response_body_async", $(this.el)).html(response_body_async);
       $(".response_body_async", $(this.el)).addClass(ret.request_id);
+      hljs.highlightBlock($(".response_body_async", $(this.el))[0]);
       $(".response", $(this.el)).slideDown();
       $(".response_hider", $(this.el)).show();
       $(".response_throbber", $(this.el)).hide();
       hljs.highlightBlock($('.response_body', $(this.el))[0]);
-      console.log("detect async status.");
-      _cb(function() {
-        return $(".response_body_async", $(this.el)).html("xx" + new Date());
-      });
-      setTimeout(_cb, 2000);
+      _this = this;
+      uri = "/v1/status/" + ret.request_id;
+      detect_status = function() {
+        $.getJSON(uri, {}, function(json, response) {
+          if (json.percent < 100) {
+            setTimeout(detect_status, 500);
+          }
+          $(".response_body_async code", $(_this.el)).html(json);
+          hljs.highlightBlock($(".response_body_async code", $(_this.el))[0]);
+        });
+      };
+      setTimeout(detect_status, 500);
       return true;
     };
 

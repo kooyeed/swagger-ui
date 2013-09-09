@@ -97,9 +97,7 @@ class OperationView extends Backbone.View
       opts.responseContentType = $("div select[name=responseContentType]", $(@el)).val()
       opts.requestContentType = $("div select[name=parameterContentType]", $(@el)).val()
 
-      $(".response_throbber", $(@el)).show()
-
-      console.log("XX:", map, opts, @showCompleteStatus)    
+      $(".response_throbber", $(@el)).show()  
 
       @model.do(map, opts, @showCompleteStatus, @showErrorStatus, @)
 
@@ -226,7 +224,7 @@ class OperationView extends Backbone.View
     async_wait_info = {
         "request_id": ret.request_id,
         "code": "",
-        "message": "",
+        "message": "正在处理中,请等待...",
         "percent": "0",
         "data": {}
     }
@@ -235,6 +233,7 @@ class OperationView extends Backbone.View
     response_body_async = pre
     $(".response_body_async", $(@el)).html response_body_async
     $(".response_body_async", $(@el)).addClass ret.request_id
+    hljs.highlightBlock($(".response_body_async", $(@el))[0])
 
 
     $(".response", $(@el)).slideDown()
@@ -242,11 +241,18 @@ class OperationView extends Backbone.View
     $(".response_throbber", $(@el)).hide()
     hljs.highlightBlock($('.response_body', $(@el))[0])
 
-    console.log "detect async status."
-    _cb () -> 
-        $(".response_body_async", $(@el)).html "xx"+new Date()
-    setTimeout(_cb, 2000)
-    
+    _this = @    
+    uri = "/v1/status/" + ret.request_id
+    detect_status = () -> 
+      $.getJSON uri, {}, (json, response) ->
+        if(json.percent < 100)
+          setTimeout(detect_status, 500)
+        $(".response_body_async code", $(_this.el)).html json
+        hljs.highlightBlock($(".response_body_async code", $(_this.el))[0])
+        return
+      return
+    setTimeout(detect_status, 500)
+
     return true
 
   toggleOperationContent: ->
