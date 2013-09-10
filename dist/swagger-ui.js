@@ -1754,7 +1754,6 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
       var async_wait_info, code, content, contentType, detect_status, headers, pre, response_body, response_body_async, response_headers, ret, uri, _this;
       content = data.content.data;
       headers = data.getHeaders();
-      console.log(data);
       contentType = headers["Content-Type"];
       if (content === void 0) {
         code = $('<code />').text("no content");

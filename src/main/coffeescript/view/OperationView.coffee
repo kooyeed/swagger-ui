@@ -189,8 +189,6 @@ class OperationView extends Backbone.View
     content = data.content.data
     headers = data.getHeaders()
 
-    console.log data
-
     # if server is nice, and sends content-type back, we can use it
     contentType = headers["Content-Type"]
 

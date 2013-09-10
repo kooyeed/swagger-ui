@@ -859,10 +859,12 @@ Object.defineProperties(Request.prototype, {
   url: {
     get: function() {
       if (!this.scheme) { return null; }
-      return sprintf("%s://%s:%s%s",
+      var real_query = this.query.substring(this.query.indexOf("?")+1);      
+      var ret = sprintf("%s://%s:%s%s",
           this.scheme, this.host, this.port,
           (this.proxy ? "/" : this.path) +
-          (this.query ? ("?" + this.query) : ""));
+          (this.query ? ("?" + real_query) : ""));            
+      return ret;
     },
     set: function(_url) {
       _url = parseUri(_url);
