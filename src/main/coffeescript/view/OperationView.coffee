@@ -189,6 +189,8 @@ class OperationView extends Backbone.View
     content = data.content.data
     headers = data.getHeaders()
 
+    console.log data
+
     # if server is nice, and sends content-type back, we can use it
     contentType = headers["Content-Type"]
 
@@ -221,19 +223,20 @@ class OperationView extends Backbone.View
 
     #add async
     ret = JSON.parse(content)
-    async_wait_info = {
-        "request_id": ret.request_id,
-        "code": "",
-        "message": "正在处理中,请等待...",
-        "percent": "0",
-        "data": {}
-    }
-    code = $('<code />').text(JSON.stringify(async_wait_info, null, 2))
-    pre = $('<pre class="json" />').append(code)
-    response_body_async = pre
-    $(".response_body_async", $(@el)).html response_body_async
-    $(".response_body_async", $(@el)).addClass ret.request_id
-    hljs.highlightBlock($(".response_body_async", $(@el))[0])
+    if(data.request.method != "GET")
+      async_wait_info = {
+          "request_id": ret.request_id,
+          "code": "",
+          "message": "正在处理中,请等待...",
+          "percent": "0",
+          "data": {}
+      }
+      code = $('<code />').text(JSON.stringify(async_wait_info, null, 2))
+      pre = $('<pre class="json" />').append(code)
+      response_body_async = pre
+      $(".response_body_async", $(@el)).html response_body_async
+      $(".response_body_async", $(@el)).addClass ret.request_id
+      hljs.highlightBlock($(".response_body_async", $(@el))[0])
 
 
     $(".response", $(@el)).slideDown()
@@ -241,17 +244,18 @@ class OperationView extends Backbone.View
     $(".response_throbber", $(@el)).hide()
     hljs.highlightBlock($('.response_body', $(@el))[0])
 
-    _this = @    
-    uri = "/v1/status/" + ret.request_id
-    detect_status = () -> 
-      $.getJSON uri, {}, (json, response) ->
-        if(json.percent < 100)
-          setTimeout(detect_status, 500)
-        $(".response_body_async code", $(_this.el)).html json
-        hljs.highlightBlock($(".response_body_async code", $(_this.el))[0])
+    if(data.request.method != "GET")
+      _this = @    
+      uri = "/v1/status/" + ret.request_id
+      detect_status = () -> 
+        $.getJSON uri, {}, (json, response) ->
+          if(json.percent < 100)
+            setTimeout(detect_status, 500)
+          $(".response_body_async code", $(_this.el)).html json
+          hljs.highlightBlock($(".response_body_async code", $(_this.el))[0])
+          return
         return
-      return
-    setTimeout(detect_status, 500)
+      setTimeout(detect_status, 500)
 
     return true
 

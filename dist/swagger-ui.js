@@ -1754,6 +1754,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
       var async_wait_info, code, content, contentType, detect_status, headers, pre, response_body, response_body_async, response_headers, ret, uri, _this;
       content = data.content.data;
       headers = data.getHeaders();
+      console.log(data);
       contentType = headers["Content-Type"];
       if (content === void 0) {
         code = $('<code />').text("no content");
@@ -1780,35 +1781,39 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
       response_headers = pre;
       $(".response_headers", $(this.el)).html(response_headers);
       ret = JSON.parse(content);
-      async_wait_info = {
-        "request_id": ret.request_id,
-        "code": "",
-        "message": "正在处理中,请等待...",
-        "percent": "0",
-        "data": {}
-      };
-      code = $('<code />').text(JSON.stringify(async_wait_info, null, 2));
-      pre = $('<pre class="json" />').append(code);
-      response_body_async = pre;
-      $(".response_body_async", $(this.el)).html(response_body_async);
-      $(".response_body_async", $(this.el)).addClass(ret.request_id);
-      hljs.highlightBlock($(".response_body_async", $(this.el))[0]);
+      if (data.request.method !== "GET") {
+        async_wait_info = {
+          "request_id": ret.request_id,
+          "code": "",
+          "message": "正在处理中,请等待...",
+          "percent": "0",
+          "data": {}
+        };
+        code = $('<code />').text(JSON.stringify(async_wait_info, null, 2));
+        pre = $('<pre class="json" />').append(code);
+        response_body_async = pre;
+        $(".response_body_async", $(this.el)).html(response_body_async);
+        $(".response_body_async", $(this.el)).addClass(ret.request_id);
+        hljs.highlightBlock($(".response_body_async", $(this.el))[0]);
+      }
       $(".response", $(this.el)).slideDown();
       $(".response_hider", $(this.el)).show();
       $(".response_throbber", $(this.el)).hide();
       hljs.highlightBlock($('.response_body', $(this.el))[0]);
-      _this = this;
-      uri = "/v1/status/" + ret.request_id;
-      detect_status = function() {
-        $.getJSON(uri, {}, function(json, response) {
-          if (json.percent < 100) {
-            setTimeout(detect_status, 500);
-          }
-          $(".response_body_async code", $(_this.el)).html(json);
-          hljs.highlightBlock($(".response_body_async code", $(_this.el))[0]);
-        });
-      };
-      setTimeout(detect_status, 500);
+      if (data.request.method !== "GET") {
+        _this = this;
+        uri = "/v1/status/" + ret.request_id;
+        detect_status = function() {
+          $.getJSON(uri, {}, function(json, response) {
+            if (json.percent < 100) {
+              setTimeout(detect_status, 500);
+            }
+            $(".response_body_async code", $(_this.el)).html(json);
+            hljs.highlightBlock($(".response_body_async code", $(_this.el))[0]);
+          });
+        };
+        setTimeout(detect_status, 500);
+      }
       return true;
     };
 
