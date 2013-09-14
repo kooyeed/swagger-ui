@@ -859,14 +859,14 @@ Object.defineProperties(Request.prototype, {
   url: {
     get: function() {
       if (!this.scheme) { return null; }
-      var real_query = this.query.substring(this.query.indexOf("?")+1);      
+      //var real_query = this.query.substring(this.query.indexOf("?")+1);      
       var ret = sprintf("%s://%s:%s%s",
           this.scheme, this.host, this.port,
           (this.proxy ? "/" : this.path) +
-          (this.query ? ("?" + real_query) : ""));            
+          (this.query ? ("?" + this.query) : ""));          
       return ret;
     },
-    set: function(_url) {
+    set: function(_url) {      
       _url = parseUri(_url);
       this.scheme = _url.protocol;
       this.host = _url.host;

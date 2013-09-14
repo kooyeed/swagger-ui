@@ -246,11 +246,11 @@ class OperationView extends Backbone.View
       _this = @    
       uri = "/v1/status/" + ret.request_id
       detect_status = () -> 
-        $.getJSON uri, {}, (json, response) ->
+        $.getJSON uri, {}, (json, response) ->                    
+          $(".response_body_async code", $(_this.el)).html JSON.stringify json
+          hljs.highlightBlock($(".response_body_async code", $(_this.el))[0])
           if(json.percent < 100)
             setTimeout(detect_status, 500)
-          $(".response_body_async code", $(_this.el)).html json
-          hljs.highlightBlock($(".response_body_async code", $(_this.el))[0])
           return
         return
       setTimeout(detect_status, 500)
